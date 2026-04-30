@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+
+<style>
+
+	.apple-popover {
+		background-color: rgba(255, 255, 255, 0.75) !important;
+		backdrop-filter: blur(20px) saturate(150%);
+		-webkit-backdrop-filter: blur(20px) saturate(150%);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0,0,0,0.05) !important;
+		border: 1px solid rgba(255, 255, 255, 0.5) !important;
+		border-radius: 12px !important; 
+		max-width: 280px !important; 
+		padding: 6px 8px !important; 
+	}
+
+
+	.apple-popover .popover-body {
+		color: #2c2c2e !important; 
+		font-size: 14px !important;
+		line-height: 1.45 !important; 
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif !important;
+		
+
+		text-align: justify !important; 
+		
+
+		-webkit-hyphens: auto !important; 
+		-ms-hyphens: auto !important;    
+		hyphens: auto !important;       
+	}
+
+
+	.apple-popover .arrow::after {
+		display: none !important;
+	}
+
+
+	.apple-popover.bs-popover-bottom .arrow {
+		display: block !important;
+		top: -10px !important;
+		width: 20px !important;
+		height: 10px !important;
+		margin: 0 !important;
+		overflow: hidden !important;
+	}
+
+
+	.apple-popover.bs-popover-bottom .arrow::before {
+		display: block !important;
+		content: "" !important;
+		position: absolute;
+		top: 4px;
+		left: 50%;
+		margin-left: -7px;
+		width: 14px;
+		height: 14px;
+		transform: rotate(45deg); 
+		
+
+		background-color: rgba(255, 255, 255, 0.75);
+		backdrop-filter: blur(20px) saturate(150%);
+		-webkit-backdrop-filter: blur(20px) saturate(150%);
+		
+
+		border-top: 1px solid rgba(255, 255, 255, 0.5);
+		border-left: 1px solid rgba(255, 255, 255, 0.5);
+		border-right: none;
+		border-bottom: none;
+
+		box-shadow: -2px -2px 4px rgba(0,0,0,0.03);
+	}
+</style>
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Meta tags for search engines to crawl -->
+	<meta name="robots" content="index,follow">
+	<meta name="description" content="DaVinciLUT -- A holistic dataset for movie understanding.">
+	<meta name="keywords" content="davincilut, dataset, movie, deep learning, video analysis, computer vision">
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+		integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+ 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+	<!-- Title and Icon -->
+	<title>DaVinciLUT</title>
+	<link rel="icon" href="src/imgs/davincilut_logo.png" />
+
+	<!-- include css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/index.css?ver=20200601">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<!-- <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script src="js/annimations.js?ver=20200601"></script>
+	<script src="js/responsive.js?ver=20200601"></script>
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light  fixed-top shadow" style="background-color: #ffffff;" id="nav-bar">
+		<div class=" col-xl-2  col-md-2 col-2">
+			<a class="navbar-brand pull-right color-cayan" href="#banner" onclick="slideTo('banner'); return false;">
+				<img src="src/imgs/davincilut_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+				<b>DaVinciLUT</b>
+			</a>
+		</div>
+
+        <div class="col-xl-6 col-md-6 col-6">
+			<div class="collapse navbar-collapse " id="nav-links1">
+				<div class="navbar-nav ">
+					<a class="nav-item nav-link text-grey" href="#about"
+						onclick="slideTo('about');  return false;"
+						data-toggle="popover" 
+						data-trigger="hover" 
+						data-placement="bottom" 
+						data-content="✨ An AI-powered color grading tool that extracts cinematic styles from reference images to instantly generate professional 3D/4D LUTs.">
+						About
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="offset-xl-1 col-xl-2 offset-xl-1   offset-md-1 col-md-3 col-0">
+			<div class="collapse navbar-collapse pull-right" id="nav-links2">
+				<div class="navbar-nav">
+                    <!-- 🌟 彻底脱敏：已将 Docs 和 Github 的源码链接全部清空 -->
+				</div>
+			</div>
+		</div>
+        <!-- 🌟 已将带有 must.edu.mo 的重复 nav-links2 区块彻底删除 -->
+	</nav>
+
+
+	<div class="banner-bg" id="banner" style="min-height: 100vh; height: auto; padding-bottom: 100px; overflow-y: visible;">
+		
+		<div class="flying-text" id='banner-text' style="width: 90%; max-width: 1000px; top: 10px; left: 50%; transform: translateX(-50%); position: absolute;">
+
+			<div class="lut-mode-switch shadow-sm">
+                <input type="radio" id="mode-3d" name="lut_mode" value="3d">
+                <label for="mode-3d" class="switch-label">3D LUT</label>
+                
+                <input type="radio" id="mode-4d" name="lut_mode" value="4d" checked>
+                <label for="mode-4d" class="switch-label">4D LUT</label>
+                
+                <div class="switch-selector"></div>
+            </div>
+
+			<div class="text-center mb-3">
+                <h2 class="apple-gradient-text">AI Color Grading</h2>
+                <p class="apple-subtitle">Upload your content and reference style</p>
+            </div>
+
+			<div class="row justify-content-center align-items-stretch">
+                
+                <div class="col-md-1 d-none d-md-flex flex-column pr-2">
+                    <div class="glass-filmstrip custom-scrollbar" id="content-filmstrip">
+                        </div>
+                </div>
+
+                <div class="col-md-5 col-10 mb-3">
+                    <h5 class="apple-box-title text-center mb-3">Original Image</h5>
+                    <div class="upload-box shadow-lg h-100" id="drop-zone-original">
+                        <input type="file" id="file-original" accept="image/*" hidden>
+                        <div class="upload-content" id="content-original">
+                            <i class="fa fa-cloud-upload" style="font-size: 3rem; color: #00d2ff; margin-bottom: 15px;"></i>
+                            <p class="upload-text mb-1">Drag & Drop Image here</p>
+                            <p class="upload-text">or <span class="upload-browse">Browse</span></p>
+                        </div>
+                        <img id="preview-original" class="image-preview" src="" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-10 mb-3">
+                    <h5 class="apple-box-title text-center mb-3">Reference Image</h5>
+                    <div class="upload-box shadow-lg h-100" id="drop-zone-reference">
+                        <input type="file" id="file-reference" accept="image/*" hidden>
+                        <div class="upload-content" id="content-reference">
+                            <i class="fa fa-image" style="font-size: 3rem; color: #ff007a; margin-bottom: 15px;"></i>
+                            <p class="upload-text mb-1">Drag & Drop Image here</p>
+                            <p class="upload-text">or <span class="upload-browse">Browse</span></p>
+                        </div>
+                        <img id="preview-reference" class="image-preview" src="" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-1 d-none d-md-flex flex-column pl-2">
+                    <div class="glass-filmstrip custom-scrollbar" id="style-filmstrip">
+                        </div>
+                </div>
+
+            </div>
+
+
+            <div class="row justify-content-center mt-3 pt-4 align-items-center">
+            
+				<div class="col-md-5 col-10 text-center" style="position: relative;">
+					<button id="generate-btn" class="apple-btn apple-btn-primary" onclick="startGeneration()">
+					Run 4DLUT Grading</button> 
+					
+				</div>
+
+				<div class="col-md-5 col-10 text-center">
+					<a id="download-lut" href="#" download="Davinci4D_Bins.cube" class="apple-btn apple-btn-secondary is-disabled">Download 4DLUT Bins</a>
+				</div>
+
+            </div>
+
+			<div id="result-section" class="mt-3" style="display: none;">
+				<div class="row justify-content-center">
+					
+					<div class="col-md-5 col-10 mb-3">
+						<h5 class="apple-box-title text-center mb-3">Color Grading Result</h5>	
+						
+						<div class="comparison-slider-wrapper shadow-lg mx-auto" style="width: 100%; height: 250px;">
+							<div class="comparison-container" id="comparison-container">
+								<img id="img-after" src="" class="img-comp">
+								<div class="img-overlay" id="img-overlay">
+									<img id="img-before" src="" class="img-comp">
+								</div>
+								<div class="slider-handle" id="slider-handle">
+									<span style="font-size:12px;">⬌</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+                    <div class="col-md-5 col-10 mb-3">
+                        <h5 class="apple-box-title text-center mb-3">3D Visualization</h5>
+                        
+                        <div style="height: 250px; display: flex; flex-direction: column; justify-content: space-between;">
+                            
+                            <div class="position-relative shadow-sm" style="height: 48%; width: 100%; background: white; border-radius: 8px; overflow: hidden;">
+                                <span class="apple-badge position-absolute" style="z-index: 10; top: 5px; left: 5px;">Structure</span>
+                                <div id="structure-wrapper" style="width: 100%; height: 100%; padding-top: 30px;">
+                                    <div id="lut-plot-index" style="width: 100%; height: 100%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="position-relative shadow-sm" style="height: 48%; width: 100%; background: white; border-radius: 8px; overflow: hidden;">
+                                <span class="apple-badge position-absolute" style="z-index: 10; top: 5px; left: 5px;">Distribution</span>
+                                <div id="distribution-wrapper" style="width: 100%; height: 100%; padding-top: 30px;">
+                                    <div id="lut-plot-value" style="width: 100%; height: 100%;"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="context-maps-section" class="shadow-sm mt-3" style="display: none; width: 100%; background: white; border-radius: 8px; padding: 10px;">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="apple-badge" style="background: rgba(0, 210, 255, 0.1); color: #00d2ff; padding: 3px 8px; border-radius: 4px;">Spatial Weights</span>
+                                <small class="text-muted" style="font-size: 10px;">Context Maps (4-Bins)</small>
+                            </div>
+                            <div id="context-maps-grid" class="context-grid"></div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+
+		</div>
+
+		
+		<div id="banner-im-grid">
+			<div class="flying-text2" id='banner-text'>
+				<img class="banner-im" src="https://i.pinimg.com/236x/f3/2a/79/f32a794f9829b3cd8e22f8b746202dbd.jpg" />
+			</div>
+			<div class="flying-text3" id='banner-text'>
+				<img class="banner-im" src="https://i.pinimg.com/236x/f3/2a/79/f32a794f9829b3cd8e22f8b746202dbd.jpg" />
+			</div>
+			<div class="flying-text4" id='banner-text'>
+				<img class="banner-im" src="https://i.pinimg.com/236x/f3/2a/79/f32a794f9829b3cd8e22f8b746202dbd.jpg" />
+			</div>
+			<div class="flying-text5" id='banner-text'>
+				<img class="banner-im" src="https://i.pinimg.com/236x/f3/2a/79/f32a794f9829b3cd8e22f8b746202dbd.jpg" />
+			</div>
+		</div>
+	</div>
+
+	<script>
+		respondToWindowWidth();
+		$(window).resize(function () {
+			respondToWindowWidth();
+		});
+		event_bind();
+		popover_bind();
+	</script>
+	
+    <script src="js/main.js"></script>
+
+    <script>
+		$(function () {
+			$('[data-toggle="popover"]').popover({
+				template: '<div class="popover apple-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+				offset: '0, 4'
+			});
+		});
+	</script>
+
+</body>
+
+</html>
